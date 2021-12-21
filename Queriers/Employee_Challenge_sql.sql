@@ -14,11 +14,17 @@ order by e.emp_no;
 
 
 -- Use Dictinct with Orderby to remove duplicate rows
-SELECT DISTINCT ON (______) _____,
-______,
-______,
-______
+SELECT DISTINCT ON (emp_no) emp_no,
+first_name,
+last_name,
+title
+INTO unique_titles
+FROM retirement_titles
+ORDER BY emp_no, title DESC;
 
-INTO nameyourtable
-FROM _______
-ORDER BY _____, _____ DESC;
+-- Retrieve the number of employees by their most recent job title who are about to retire.
+SELECT COUNT(title), title
+INTO retiring_titles
+FROM unique_titles
+GROUP BY title
+ORDER BY COUNT(title) DESC;
